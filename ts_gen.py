@@ -16,11 +16,13 @@ import matplotlib.pyplot as plt
 
 # ------------------------------  FUNCTIONS  -----------------------------
 def ts_gen(max, w):
-    i, a, b, c = 0, 0, 0, 0
+    # i, a, b, c = 0, 0, 0, 0
+    i, a, b = 0, 0, 0
     while i < max:
-        c = -0.9 * a + w[i]
-        yield c
-        a, b, c = b, c, a
+        # c = -0.9 * a + w[i]
+        a, b = b, -0.9 * a + w[i]
+        yield b
+        # a, b, c = b, c, a
         i = i + 1
 
 
@@ -35,7 +37,7 @@ xa = np.zeros(100)
 # For model (a)
 xa[:2] = w[:2]
 for i in range(2, 100):
-    xa[i] = -0.9 * xa[i-2] + w[i]
+    xa[i] = -0.9 * xa[i - 2] + w[i]
 # 2) use a generator and iterator.
 x = np.array([xi for xi in ts_gen(100, w)])
 # ============  Plot the differences  ============
